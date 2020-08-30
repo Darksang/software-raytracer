@@ -6,6 +6,7 @@
 #include <glm/gtx/hash.hpp>
 
 #include <vector>
+#include <string>
 
 #include "vertex.h"
 

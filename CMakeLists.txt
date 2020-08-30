@@ -12,6 +12,7 @@ include_directories(${INCLUDE_DIR})
 set(SRC ${SRC_DIR}/main.cpp
         ${SRC_DIR}/sphere.cpp
         ${SRC_DIR}/triangle.cpp
+        ${SRC_DIR}/model.cpp
         ${SRC_DIR}/hittable_list.cpp
         ${SRC_DIR}/mesh.cpp)
 
@@ -19,3 +20,9 @@ set(SRC ${SRC_DIR}/main.cpp
 add_executable(${PROJECT_NAME} ${SRC})
 target_include_directories(${PROJECT_NAME} PRIVATE "${SRC_DIR}" "${INCLUDE_DIR}")
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 11)
+
+# OpenMP
+find_package(OpenMP)
+if (OpenMP_CXX_FOUND)
+    target_link_libraries(${PROJECT_NAME} OpenMP::OpenMP_CXX)
+endif()

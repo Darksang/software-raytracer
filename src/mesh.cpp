@@ -26,10 +26,10 @@ void Mesh::LoadOBJ(const std::string & File) {
     std::string Warning, Error;
 
     if (tinyobj::LoadObj(&Attributes, &Shapes, &Materials, &Warning, &Error, File.c_str())) {
-        /*std::cout << "Number of Vertices = " << (int)(Attributes.vertices.size() / 3) << std::endl;
-        std::cout << "Number of Normals = " << (int)(Attributes.normals.size() / 3) << std::endl;
-        std::cout << "Number of TexCoords = " << (int)(Attributes.texcoords.size() / 2) << std::endl;
-        std::cout << "Number of Shapes = " << Shapes.size() << std::endl; */
+        /*std::cerr << "Number of Vertices = " << (int)(Attributes.vertices.size() / 3) << std::endl;
+        std::cerr << "Number of Normals = " << (int)(Attributes.normals.size() / 3) << std::endl;
+        std::cerr << "Number of TexCoords = " << (int)(Attributes.texcoords.size() / 2) << std::endl;
+        std::cerr << "Number of Shapes = " << Shapes.size() << std::endl; */
 
         for (const auto & Shape : Shapes) {
             for (const auto & Index : Shape.mesh.indices) {
@@ -62,10 +62,10 @@ void Mesh::LoadOBJ(const std::string & File) {
             }
         }
 
-        std::cout << "\n#### OBJ Mesh: " << File << " ####" << std::endl;
-        std::cout << "Vertices = " << VertexBuffer.size() << std::endl;
-        std::cout << "Indices = " << IndexBuffer.size() << std::endl;
-        std::cout << "Triangles = " << IndexBuffer.size() / 3 << std::endl;
-        std::cout << "####" << std::endl;
+        std::cerr << "\n#### OBJ Mesh: " << File << " ####" << std::endl;
+        std::cerr << "Vertices = " << VertexBuffer.size() << std::endl;
+        std::cerr << "Indices = " << IndexBuffer.size() << std::endl;
+        std::cerr << "Triangles = " << IndexBuffer.size() / 3 << std::endl;
+        std::cerr << "####" << std::endl;
     }
 }

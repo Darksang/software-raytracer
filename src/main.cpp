@@ -15,6 +15,7 @@
 
 #include "sphere.h"
 #include "triangle.h"
+#include "model.h"
 
 glm::vec3 RayColor(const Ray & r, const Hittable & World, int Depth) {
    HitRecord Rec;
@@ -46,7 +47,7 @@ int main(int argc, char **argv) {
    const int MaxDepth = 50;
 
    // Camera settings
-   Camera Cam(glm::vec3(-2, 2, 1), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 60, AspectRatio);
+   Camera Cam(glm::vec3(-2, 2, 2), glm::vec3(0, 0, -1), glm::vec3(0, 1, 0), 90, AspectRatio);
 
    // World
    HittableList World;
@@ -59,9 +60,15 @@ int main(int argc, char **argv) {
 
    World.Add(make_shared<Sphere>(glm::vec3(0, 0, -1), 0.5, MaterialCenter));
    World.Add(make_shared<Sphere>(glm::vec3(0, -100.5, -1), 100, MaterialGround));
-   World.Add(make_shared<Sphere>(glm::vec3(-1.0, 0.0, -1), 0.5, MaterialLeft));
-   World.Add(make_shared<Sphere>(glm::vec3(1.0, 0.0, -1), 0.5, MaterialRight));
+   World.Add(make_shared<Sphere>(glm::vec3(-2.0, 0.0, -1), 0.5, MaterialLeft));
+   World.Add(make_shared<Sphere>(glm::vec3(2.0, 0.0, -1), 0.5, MaterialRight));
    World.Add(make_shared<Triangle>(glm::vec3(-1, -1, -5), glm::vec3(1, -1, -5), glm::vec3(0, 1, -5), MaterialTriangle));
+
+   // 3D Models
+   Mesh * Object = new Mesh();
+   Object->LoadOBJ("assets/obj/cube.obj");
+
+   World.Add(make_shared<Model>(Object, MaterialCenter));
 
    // Rendering
    std::cout << "P3\n" << ImageWidth << " " << ImageHeight << "\n255\n";
